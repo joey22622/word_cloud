@@ -24,7 +24,8 @@
   display: flex;
   flex-direction: column;
   padding: 20px;
-  width: 40vw;
+  /* width: 40vw; */
+  flex-grow: 1;
 }
 .ignore-row{
   display: flex;
@@ -45,8 +46,65 @@ textarea{
   height: 20em;
 }
 
-.App-link {
-  color: #61dafb;
+
+.word-count-bank{
+ /* flex-grow: 1; */
+}
+.word-count-bank{
+  /* width: 100%; */
+  padding: 20px;
+  max-width: 60vw;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+}
+.key-word{
+  display: inline-block;
+  margin: 10px;
+  display: flex;
+  background: rgba(0,0,0,.2);
+  align-items: center;
+  /* border: solid rgba(255,255,255,1) 1px; */
+  border-radius: 5px;
+  min-height: 3rem;
+  padding: 0 1rem;
+  color: rgba(255,255,255,.9);
+  justify-content: space-between;
+}
+.key-word span{
+  display: block;
+  padding-right: 1rem;
+}
+.key-word .count{
+  padding-right: 0;
+  padding-left: 1rem;
+  opacity: .6;
+  pointer-events: none;
+}
+.key-word.count-6{
+  font-size: 2rem;
+  opacity: 1;
+  /* color: */
+}
+.key-word.count-5{
+  font-size: 1.8rem;
+  opacity: .9;
+}
+.key-word.count-4{
+  font-size: 1.6rem;
+  opacity: .8;
+}
+.key-word.count-3{
+  font-size: 1.4rem;
+  opacity: .7;
+}
+.key-word.count-2{
+  font-size: 1.2rem;
+  opacity: .6;
+}
+.key-word.count-1{
+  /* font-size: 1.4rem; */
+  opacity: .5;
 }
 
 @keyframes App-logo-spin {

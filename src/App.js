@@ -7,12 +7,19 @@ class App extends Component {
     query : '',
     queryArr : [],
     wordCount : [],
-    ignoreArr : ["the","our","must","through","at","there","some","my","of","be","use","her","than","and","this","an","would","first","a","have","each","make","water","to","from","which","like","been","in","or","she","him","call","is","one","do","into","who","you","had","how","time","oil","that","by","their","has","its","it","word","if","look","now","he","but","will","two","find","was","not","up","more","long","for","what","other","write","down","on","all","about","go","day","are","were","out","see","did","as","we","many","number","get","with","when","then","no","come","his","your","them","way","made","they","can","these","could","may"]
+    ignoreArr : ["the","our","must","through","at","there","some","my","of","be","use", "using", "her","than","and","this","an","would","first","a","have","each","make","water","to","from","which","like","been","in","or","she","him","call","is","one","do","into","who","you","had","how","time","oil","that","by","their","has","its","it","word","if","look","now","he","but","will","two","find","was","not","up","more","long","for","what","other","write","down","on","all","about","go","day","are","were","out","see","did","as","we","many","number","get","with","when","then","no","come","his","your","them","way","made","they","can","these","could","may"]
   }
   wordCloud = event => {
+    let text;
+    if(event){
     console.log("wordCloud");
-    let text =  event.target.value.toLowerCase();
-    text = text.replace(/[^a-zA-Z ]/g, "");
+    text =  event.target.value.toLowerCase();
+    } else {
+      text = "Nullam quis risus eget urna mollis ornare vel eu leo. Curabitur blandit tempus porttitor. Donec id elit non mi porta gravida at eget metus. Curabitur blandit tempus porttitor. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vestibulum id ligula porta felis euismod semper. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Donec id elit non mi porta gravida at eget metus. Etiam porta sem malesuada magna mollis euismod. Cras mattis consectetur purus sit amet fermentum. Nullam id dolor id nibh ultricies vehicula ut id elit. Aenean lacinia bibendum nulla sed consectetur. Cras mattis consectetur purus sit amet fermentum. Cras mattis consectetur purus sit amet fermentum. Curabitur blandit tempus porttitor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.";
+    }
+    text = text.replace(/\n/g, " ");
+    text =  text.replace(/\s\s+/g, ' ');
+    text = text.replace(/[^a-zA-Z \-]/g, "");
     const textArr = text.split(" ");
     let ignoreArr = this.state.ignoreArr;
 
@@ -46,9 +53,13 @@ class App extends Component {
     // console.log(sorted);
 
     this.setState({wordCount : sortable});
-    this.setState({query : event.target.value});
+    this.setState({query : text});
     console.log("wordCount:");
     console.log(this.state.wordCount);
+  }
+  componentDidMount(){
+    this.wordCloud();
+  
   }
   render() {
       return (
@@ -58,30 +69,26 @@ class App extends Component {
             <input className="ignore-text" placeholder="add words to be ignored"></input>
             <button className="ignore-send">add word</button>
           </div>
-          <textarea className="source-text"placeholder="paste block of text here" onChange={this.wordCloud}></textarea>
+          <textarea className="source-text"placeholder="paste block of text here" onChange={this.wordCloud}>
+Nullam quis risus eget urna mollis ornare vel eu leo. Curabitur blandit tempus porttitor. Donec id elit non mi porta gravida at eget metus. Curabitur blandit tempus porttitor. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vestibulum id ligula porta felis euismod semper. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Donec id elit non mi porta gravida at eget metus. Etiam porta sem malesuada magna mollis euismod. Cras mattis consectetur purus sit amet fermentum. Nullam id dolor id nibh ultricies vehicula ut id elit. Aenean lacinia bibendum nulla sed consectetur. Cras mattis consectetur purus sit amet fermentum. Cras mattis consectetur purus sit amet fermentum. Curabitur blandit tempus porttitor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+          </textarea>
         </div>
-        <table>
-          <thead>
-          <tr>
-            <th>KEY WORD</th>
-            <th># OF USES </th>
-          </tr>
-          </thead>
-        <tbody>
+
+        <div className="word-count-bank">
+          {/* <div className="inner-wrap"> */}
           {this.state.wordCount.map((val, i) => {
             return(
-            <tr key={i}>
-              <td>{val[0]}</td>
-              <td>{val[1]}</td>
+            <div className= {"key-word count-" + val[1]} key={i}>
+              <span className="word">{val[0]}</span>
+              <span className="count">{val[1]}</span>
 
-            </tr>
+            </div>
             )
           })}
 
 
-        </tbody>
-        
-      </table>
+        {/* </div> */}
+        </div>
       </div>
 
    );
